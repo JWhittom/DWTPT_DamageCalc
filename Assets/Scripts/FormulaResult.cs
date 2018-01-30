@@ -32,17 +32,16 @@ public class FormulaResult : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-        attackField.text = atk.ToString();
-        speedField.text = spd.ToString();
-        defenseField.text = def.ToString();
-        healthField.text = hp.ToString();
-	}
+        attackField.textComponent.text = atk.ToString();
+        speedField.textComponent.text = spd.ToString();
+        defenseField.textComponent.text = def.ToString();
+        healthField.textComponent.text = hp.ToString();
+    }
 	
 	// Update is called once per frame
 	void Update () 
 	{
-
-        result.text = atk + " - " + def + " = " + (atk - def).ToString() + " damage.\n Health remaining: " + (hp - (atk - def)).ToString(); 
+        result.text = string.Format("{0} - {1} = {2} damage.\nHealth remaining: {3}", atk, def, atk - def, hp - atk + def);
 
     }
 }
