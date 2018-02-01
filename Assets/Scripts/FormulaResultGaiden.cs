@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FormulaResult : MonoBehaviour 
+public class FormulaResultGaiden : MonoBehaviour 
 {
     [SerializeField]
     int atk = 10;
@@ -28,9 +28,6 @@ public class FormulaResult : MonoBehaviour
     Toggle resToggle;
     [SerializeField]
     Text result;
-
-    [SerializeField] List<RectTransform> statBoxes;
-    [SerializeField] List<int> numericStats;
 
 	private int damage;
 
