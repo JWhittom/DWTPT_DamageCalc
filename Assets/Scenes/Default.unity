@@ -1023,6 +1023,7 @@ MonoBehaviour:
   speedField: {fileID: 608233040}
   defenseField: {fileID: 690654722}
   healthField: {fileID: 1920169965}
+  resToggle: {fileID: 432379513}
   result: {fileID: 2038385225}
 --- !u!1 &953778412
 GameObject:

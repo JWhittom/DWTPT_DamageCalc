@@ -25,6 +25,8 @@ public class FormulaResult : MonoBehaviour
     [SerializeField]
     RectTransform healthField;
     [SerializeField]
+    Toggle resToggle;
+    [SerializeField]
     Text result;
 
 	private int damage;
@@ -40,10 +42,13 @@ public class FormulaResult : MonoBehaviour
 	void Update () 
 	{
         UpdateStats();
-		if (res)
-			damage = atk - Mathf.RoundToInt ((def * 1.15f) + .1f);
-		else
-			damage = atk - def;
+        if (res)
+        {
+            def = Mathf.RoundToInt((def * 1.15f) + .1f);
+            damage = atk - def;
+        }
+        else
+            damage = atk - def;
 		if (damage > 0)
         {
             if (hp - damage * spd >= 0)
@@ -57,6 +62,7 @@ public class FormulaResult : MonoBehaviour
 
     void UpdateStats()
     {
+        res = resToggle.isOn;
         if (attackField.Find("Text").GetComponent<Text>().text != "")
             int.TryParse(attackField.Find("Text").GetComponent<Text>().text, out atk);
         else
