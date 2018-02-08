@@ -11,6 +11,8 @@ public class FormulaResult : MonoBehaviour
     Toggle resToggleTwo;
     [SerializeField]
     Text result;
+    [SerializeField]
+    List<Dropdown> weaponChoice;
     [Tooltip("P1 Attack, P1 Defense, P1 Speed, P1 Health, P2 Attack, P2 Defense, P2 Speed, P2 Health")]
     [SerializeField] List<RectTransform> statBoxes;
     [SerializeField] List<int> numericStats;
@@ -33,11 +35,13 @@ public class FormulaResult : MonoBehaviour
     int hp = 7;
     int enemySpd = 2;
     int atkTimes = 1;
+    int player = 0;
     bool res;
     bool resOne;
     bool resTwo;
     bool pTwoDead = false;
     string resultString;
+    int p1WeaponChoice;
 
     void Start () 
 	{
@@ -54,14 +58,42 @@ public class FormulaResult : MonoBehaviour
         UpdateStats();
         for (int i = 1; i <= 2; i++)
         {
-
-            if (res)
+            if (weaponChoice[player].value == 0)
             {
-                numericStats[def] = Mathf.RoundToInt((numericStats[def] * 1.15f) + .1f);
-                damage = numericStats[atk] - numericStats[def];
+                numericStats[def] = numericStats[def] + 2;
+                numericStats[spd] = numericStats[spd] + 3;
+                if (res)
+                {
+                    numericStats[def] = Mathf.RoundToInt((numericStats[def] * 1.15f) + .1f);
+                    damage = numericStats[atk] - numericStats[def];
+                }
+                else
+                    damage = numericStats[atk] - numericStats[def];
             }
-            else
-                damage = numericStats[atk] - numericStats[def];
+            else if (weaponChoice[player].value == 1)
+            {
+                numericStats[def] = numericStats[def] + 3;
+                numericStats[spd] = numericStats[spd] - 1;
+                if (res)
+                {
+                    numericStats[def] = Mathf.RoundToInt((numericStats[def] * 1.15f) + .1f);
+                    damage = numericStats[atk] - numericStats[def];
+                }
+                else
+                    damage = numericStats[atk] - numericStats[def];
+            }
+            else if (weaponChoice[player].value == 2)
+            {
+                numericStats[def] = numericStats[def] + 1;
+                numericStats[spd] = numericStats[spd] + 2;
+                if (res)
+                {
+                    numericStats[def] = Mathf.RoundToInt((numericStats[def] * 1.15f) + .1f);
+                    damage = numericStats[atk] - numericStats[def];
+                }
+                else
+                    damage = numericStats[atk] - numericStats[def];
+            }
             if (numericStats[spd] - numericStats[enemySpd] >= 5)
                 atkTimes = 2;
             else
@@ -88,6 +120,7 @@ public class FormulaResult : MonoBehaviour
                 spd = 6;
                 def = 1;
                 hp = 3;
+                player = 1;
                 enemySpd = 2;
                 res = resOne;
                 result.text = resultString;
@@ -123,5 +156,6 @@ public class FormulaResult : MonoBehaviour
                 int.TryParse(statBoxes[i].Find("Placeholder").GetComponent<Text>().text, out val);
             numericStats[i] = val;
         }
+
     }
 }
